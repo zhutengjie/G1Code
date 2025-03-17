@@ -39,5 +39,5 @@ import os
 from legged_gym.utils.task_registry import task_registry
 
 task_registry.register( "gr1t2", LeggedRobot, GR1T2Cfg(), GR1T2CfgPPO() )
-#task_registry.register( "g1", LeggedRobot, G1Cfg(), G1CfgPPO() )
-task_registry.register( "g1", LeggedRobot_reach, G1Cfg(), G1CfgPPO() )
+task_registry.register( "g1", LeggedRobot, G1Cfg(), G1CfgPPO() )
+#task_registry.register( "g1", LeggedRobot_reach, G1Cfg(), G1CfgPPO() )

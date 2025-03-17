@@ -62,7 +62,7 @@ def play(args):
     env_cfg, train_cfg = task_registry.get_cfgs(name=args.task)
     env_cfg.env.num_envs =  1
     env_cfg.env.episode_length_s = 60
-    env_cfg.commands.resampling_time = 60
+    env_cfg.commands.resampling_time = 4
     env_cfg.terrain.num_rows = 5
     env_cfg.terrain.num_cols = 5
     env_cfg.terrain.height = [0.02, 0.02]

@@ -26,7 +26,7 @@ class G1Cfg(LeggedRobotCfg):
         curriculum = True
         max_curriculum = 2.0
         num_commands = 1 # default: lin_vel_x, lin_vel_y, ang_vel_yaw, heading (in heading mode ang_vel_yaw is recomputed from heading error)
-        resampling_time = 4. # time before command are changed[s]
+        resampling_time = 10. # time before command are changed[s]
         class ranges:
             lin_vel = [-0.5, 0.5] # min max [m/s]
 
@@ -161,6 +161,7 @@ class G1Cfg(LeggedRobotCfg):
 
     class asset(LeggedRobotCfg.asset):
         file = '{LEGGED_GYM_ROOT_DIR}/resources/robots/g1/urdf/g1_29dof_rev_1_0.urdf'
+        marker = '{LEGGED_GYM_ROOT_DIR}/resources/gymassets/mjcf/location_marker.urdf'
         name = "g1"
         foot_name = "ankle_pitch"
         left_foot_name = "left_foot"
@@ -237,7 +238,7 @@ class G1Cfg(LeggedRobotCfg):
             # tracking rewards
             base_height = -10.0
             tracking_lin_vel = 2.0
-            constraint_other_vel = 1.0 #步长
+            constraint_other_vel = 1.0
             # regularization rewards
             lin_vel_z = -1.0
             ang_vel_xy = -0.05
