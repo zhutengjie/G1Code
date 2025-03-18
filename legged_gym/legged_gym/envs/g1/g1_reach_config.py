@@ -9,8 +9,8 @@ class G1Cfg(LeggedRobotCfg):
         
         num_actions = 23 # number of actuators on robot
         num_dofs = 23
-        num_one_step_observations = 7 + num_dofs * 2 + num_actions
-        num_privileged_obs = 7 + num_dofs * 2 + num_actions  + 3
+        num_one_step_observations = 6 + num_dofs * 2 + num_actions + 3
+        num_privileged_obs = 6 + num_dofs * 2 + num_actions  + 3
 
         num_observations = num_actor_history * num_one_step_observations
 
@@ -21,7 +21,7 @@ class G1Cfg(LeggedRobotCfg):
         tarSpeed = 1.0
         tarChangeStepsMin = 15
         tarChangeStepsMax = 20
-        tarDistMax = 3.0
+        tarDistMax = 1.0
         tarHeightMin = 0.4
         tarHeightMax = 1.3
 
@@ -31,7 +31,7 @@ class G1Cfg(LeggedRobotCfg):
         num_future_goal_obs = 2
         
     class commands(LeggedRobotCfg.commands):
-        curriculum = True
+        curriculum = False
         max_curriculum = 2.0
         num_commands = 1 # default: lin_vel_x, lin_vel_y, ang_vel_yaw, heading (in heading mode ang_vel_yaw is recomputed from heading error)
         resampling_time = 10. # time before command are changed[s]
@@ -245,8 +245,8 @@ class G1Cfg(LeggedRobotCfg):
             
             # tracking rewards
             base_height = -10.0
-            tracking_lin_vel = 2.0
-            constraint_other_vel = 1.0
+            reach = 2.0
+            constraint_foot_vel = 1.0
             # regularization rewards
             lin_vel_z = -1.0
             ang_vel_xy = -0.05

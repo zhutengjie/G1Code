@@ -28,7 +28,7 @@ class G1Cfg(LeggedRobotCfg):
         num_commands = 1 # default: lin_vel_x, lin_vel_y, ang_vel_yaw, heading (in heading mode ang_vel_yaw is recomputed from heading error)
         resampling_time = 4. # time before command are changed[s]
         class ranges:
-            lin_vel = [-0.5, 0.5] # min max [m/s]
+            lin_vel = [-1, 1] # min max [m/s]
 
 
     class init_state(LeggedRobotCfg.init_state):
@@ -224,7 +224,7 @@ class G1Cfg(LeggedRobotCfg):
         initial_joint_pos_scale = [0.5, 1.5]
         initial_joint_pos_offset = [-0.1, 0.1]
         
-        push_robots = True
+        push_robots = False
         push_interval_s = 15
         max_push_vel_xy = 1.5
 

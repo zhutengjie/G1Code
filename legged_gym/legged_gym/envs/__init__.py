@@ -32,12 +32,14 @@ from legged_gym import LEGGED_GYM_ROOT_DIR, LEGGED_GYM_ENVS_DIR
 from .base.legged_robot import LeggedRobot
 from .base.leggeed_robot_reach import LeggedRobot_reach
 from legged_gym.envs.gr1t2.gr1t2_config import GR1T2Cfg, GR1T2CfgPPO
-from .g1.g1_config import G1Cfg, G1CfgPPO
+#from .g1.g1_config import G1Cfg, G1CfgPPO
+from .g1.g1_reach_config import G1Cfg, G1CfgPPO
+
 
 import os
 
 from legged_gym.utils.task_registry import task_registry
 
 task_registry.register( "gr1t2", LeggedRobot, GR1T2Cfg(), GR1T2CfgPPO() )
-task_registry.register( "g1", LeggedRobot, G1Cfg(), G1CfgPPO() )
-#task_registry.register( "g1", LeggedRobot_reach, G1Cfg(), G1CfgPPO() )
+# task_registry.register( "g1", LeggedRobot, G1Cfg(), G1CfgPPO() )
+task_registry.register( "g1", LeggedRobot_reach, G1Cfg(), G1CfgPPO() )

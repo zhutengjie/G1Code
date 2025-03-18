@@ -238,7 +238,7 @@ class LeggedRobot(BaseTask):
             return
             
         if self.cfg.commands.curriculum and (self.common_step_counter % self.max_episode_length==0):
-            self.update_command_curriculum(env_ids)
+            self.update_command_curriculum(env_ids)  #课程学习，逐渐增加难度，学的更好。
 
 
         self.refresh_actor_rigid_shape_props(env_ids)
@@ -383,7 +383,7 @@ class LeggedRobot(BaseTask):
         if self.add_noise:
             current_actor_obs = current_actor_obs + (2 * torch.rand_like(current_actor_obs) - 1) * self.noise_scale_vec[0:(7 + 2 * self.num_dof + self.num_actions)]
 
-        self.obs_buf = torch.cat((self.obs_buf[:, self.num_one_step_obs:self.actor_obs_length], current_actor_obs), dim=-1)
+        self.obs_buf = torch.cat((self.obs_buf[:, self.num_one_step_obs:self.actor_obs_length], current_actor_obs), dim=-1) # 一共六次的
         
         self.privileged_obs_buf = current_obs
         
@@ -1132,14 +1132,14 @@ class LeggedRobot(BaseTask):
     def _reward_tracking_lin_vel(self):
         # Tracking of linear velocity commands (xy axes)
         aside_vel_error = torch.sum(torch.square(0.0 * self.commands[:, 0:1] - self.base_lin_vel[:, 1:2]), dim=1) 
-        return torch.exp(-aside_vel_error/self.cfg.rewards.tracking_sigma)  #鼓励直线移动
+        return torch.exp(-aside_vel_error/self.cfg.rewards.tracking_sigma)  #禁止横向移动
     
 
     def _reward_constraint_other_vel(self):
         # Tracking of linear velocity commands (xy axes)
         forward_vel_error = torch.sum(torch.square(self.commands[:, 0:1] - self.base_lin_vel[:, 0:1]), dim=1)
         ang_vel_error = torch.square(self.commands[:, 0] - self.base_ang_vel[:, 2])
-        return torch.exp(-forward_vel_error/self.cfg.rewards.tracking_sigma) + torch.exp(-ang_vel_error/self.cfg.rewards.tracking_sigma) #禁止横向移动
+        return torch.exp(-forward_vel_error/self.cfg.rewards.tracking_sigma) + torch.exp(-ang_vel_error/self.cfg.rewards.tracking_sigma) #鼓励前后移动
 
 
     def _reward_contact_momentum(self):
