@@ -104,6 +104,7 @@ class LeggedRobot_reach(LeggedRobot):
 
         if len(env_ids)>0:
             self._reset_task(env_ids)
+        if len(env_ids)>0 and (not self.headless):
             self._update_marker()
         return
 
