@@ -201,6 +201,13 @@ class LeggedRobot_reach(LeggedRobot):
 
         return env_ids, termination_privileged_obs
     
+    def _init_buffers(self):
+        super()._init_buffers()
+        self.left_feet_vel = self.rigid_body_states.view(self.num_envs, self.num_bodies, 13)[:, self.left_feet_indices, 7:10]
+        self.right_feet_vel = self.rigid_body_states.view(self.num_envs, self.num_bodies, 13)[:, self.right_feet_indices, 7:10]
+        self.left_feet_vel_norm = torch.norm(self.left_feet_vel, dim=-1)
+        self.right_feet_vel_norm = torch.norm(self.right_feet_vel, dim=-1)
+    
     def _reward_constraint_foot_vel(self):
         
         left_foot_error = torch.sum(self.left_feet_vel_norm, dim=1)
