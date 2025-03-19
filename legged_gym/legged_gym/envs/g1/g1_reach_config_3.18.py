@@ -19,12 +19,11 @@ class G1Cfg(LeggedRobotCfg):
         episode_length_s = 30 # episode length in seconds
 
         tarSpeed = 1.0
-        tarChangeStepsMin = 15
-        tarChangeStepsMax = 20 #每个epoch 保持固定
-
+        # tarChangeStepsMin = 15
+        # tarChangeStepsMax = 20 #每个epoch 保持固定
         tarDistMax = 1.0
-        tarHeightMin = 0.3
-        tarHeightMax = 0.8
+        tarHeightMin = 0.2
+        tarHeightMax = 1.0
 
 
         next_goal_threshold = 0.2
@@ -169,7 +168,7 @@ class G1Cfg(LeggedRobotCfg):
 
 
     class asset(LeggedRobotCfg.asset):
-        file = '{LEGGED_GYM_ROOT_DIR}/resources/robots/g1/urdf/g1_29dof_rev_1_0_allcollision.urdf'
+        file = '{LEGGED_GYM_ROOT_DIR}/resources/robots/g1/urdf/g1_29dof_rev_1_0.urdf'
         marker = '{LEGGED_GYM_ROOT_DIR}/resources/gymassets/mjcf/location_marker.urdf'
         name = "g1"
         foot_name = "ankle_pitch"
@@ -246,8 +245,8 @@ class G1Cfg(LeggedRobotCfg):
             
             # tracking rewards
             base_height = -10.0
-            reach = 5.0 #大一点
-            constraint_foot_vel = 0.1 #scale 小一点
+            reach = 2.0
+            constraint_foot_vel = 1.0 #scale 小一点
             # regularization rewards
             # lin_vel_z = -1.0
             ang_vel_xy = -0.05
@@ -258,7 +257,7 @@ class G1Cfg(LeggedRobotCfg):
             delta_torques = -1.0e-7
             torques = -1e-5 # -1e-4
             dof_vel = -5e-4
-            feet_air_time = 1.0  #允许脚步轻微移动 # 桌子距离变化丰富一点
+            # feet_air_time = 1.0  #允许脚步轻微移动 # 桌子距离变化丰富一点
 
             dof_pos_limits = -2.0 #-2.0
             dof_vel_limits = -1.0 #0.0

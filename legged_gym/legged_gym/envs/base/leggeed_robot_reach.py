@@ -214,8 +214,20 @@ class LeggedRobot_reach(LeggedRobot):
         left_foot_error = torch.sum(self.left_feet_vel_norm, dim=1)
         right_foot_error = torch.sum(self.right_feet_vel_norm, dim=1)
         return torch.exp(-left_foot_error/self.cfg.rewards.tracking_sigma) + torch.exp(-right_foot_error/self.cfg.rewards.tracking_sigma)
-
     
+    def _reward_feet_air_time(self):
+        # Reward long steps
+        # Need to filter the contacts because the contact reporting of PhysX is unreliable on meshes
+        feet_air_time = self.feet_air_time.clone()
+        feet_air_time = torch.clamp(feet_air_time, min=0.5)
+        rew_airTime = torch.sum((0.5 - feet_air_time) * self.first_contacts, dim=1) # reward only on first contact with the ground
+        
+        #rew_airTime *= torch.norm(self.commands[:, 0:1], dim=1) > 0.1 # no reward for zero command
+
+        return rew_airTime
+    
+
+
 
 @torch.jit.script
 def calc_heading(q):

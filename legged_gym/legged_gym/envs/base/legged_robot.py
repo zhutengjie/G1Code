@@ -208,7 +208,7 @@ class LeggedRobot(BaseTask):
         self.last_root_vel[:] = self.robot_root_states[:, 7:13]
         
         # reset contact related quantities
-        self.feet_air_time *= ~self.contact_filt
+        self.feet_air_time *= ~self.contact_filt #滞空时间
 
         if self.viewer and self.enable_viewer_sync and self.debug_viz:
             self._draw_debug_vis()
