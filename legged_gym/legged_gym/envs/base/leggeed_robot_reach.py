@@ -137,7 +137,7 @@ class LeggedRobot_reach(LeggedRobot):
     
     def _reward_reach(self):
         # type: (Tensor, Tensor, Tensor, float, float) -> Tensor
-        pos_err_scale = 4.0
+        pos_err_scale = 40.0
         reach_body_pos = self.rigid_body_states[:, self._reach_body_id, :3]
 
         pos_diff = self._tar_pos - reach_body_pos
