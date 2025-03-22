@@ -96,6 +96,8 @@ class LeggedRobot_reach(LeggedRobot):
         rest_env_ids = reset_task_mask.nonzero(as_tuple=False).flatten()
         if len(rest_env_ids) > 0:
             self._reset_task(rest_env_ids)
+            if not self.headless:
+                 self._update_marker()     
         return
 
 
@@ -121,7 +123,7 @@ class LeggedRobot_reach(LeggedRobot):
         n = len(env_ids)
 
         a = torch.rand(n, device=self.device, dtype=torch.float32) * 0.5
-        b = torch.rand(n, device=self.device, dtype=torch.float32)* 0.75 - 0.5
+        b = torch.rand(n, device=self.device, dtype=torch.float32)* 0.5 - 1.0
         x_noises = a * torch.cos(np.pi * b)
         y_noises = a * torch.sin(np.pi * b)
         rand_pos = torch.cat([x_noises.unsqueeze(1), y_noises.unsqueeze(1), torch.rand((n, 1), device=self.device, dtype=torch.float32)],dim=1)
@@ -129,8 +131,7 @@ class LeggedRobot_reach(LeggedRobot):
         rand_pos = quat_rotate(self.robot_root_states[env_ids, 3:7], rand_pos)
         rand_pos[:, :2] += self.robot_root_states[env_ids, :2]
         
-        change_steps = torch.randint(low=self._tar_change_steps_min, high=self._tar_change_steps_max,
-                                     size=(n,), device=self.device, dtype=torch.int64)
+        change_steps = torch.randint(low=int(self._tar_change_steps_min/self.dt), high=int(self._tar_change_steps_max/self.dt), size=(n,), device=self.device, dtype=torch.int64)
         self._tar_pos[env_ids, :] = rand_pos
         self._tar_change_steps[env_ids] = self.episode_length_buf[env_ids] + change_steps
         return

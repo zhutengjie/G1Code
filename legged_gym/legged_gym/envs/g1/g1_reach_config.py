@@ -19,8 +19,8 @@ class G1Cfg(LeggedRobotCfg):
         episode_length_s = 30 # episode length in seconds
 
         tarSpeed = 1.0
-        tarChangeStepsMin = 15
-        tarChangeStepsMax = 20 #每个epoch 保持固定
+        tarChangeStepsMin = 3
+        tarChangeStepsMax = 5 #每个epoch 保持固定
 
         tarDistMax = 1.0
         tarHeightMin = 0.3
