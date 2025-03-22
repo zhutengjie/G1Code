@@ -41,12 +41,12 @@
         <color rgba="0.7 0.7 0.7 1"/>
       </material>
     </visual>
-    <!-- <collision>
+    <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
         <mesh filename="../meshes/pelvis_contour_link.STL"/>
       </geometry>
-    </collision> -->
+    </collision>
   </link>
   <joint name="pelvis_contour_joint" type="fixed">
     <parent link="pelvis"/>
@@ -69,12 +69,12 @@
         <color rgba="0.2 0.2 0.2 1"/>
       </material>
     </visual>
-    <!-- <collision>
+    <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
         <mesh filename="../meshes/left_hip_pitch_link.STL"/>
       </geometry>
-    </collision> -->
+    </collision>
   </link>
   <joint name="left_hip_pitch_joint" type="revolute">
     <origin xyz="0 0.064452 -0.1027" rpy="0 0 0"/>
@@ -305,12 +305,12 @@
         <color rgba="0.2 0.2 0.2 1"/>
       </material>
     </visual>
-    <!-- <collision>
+    <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
         <mesh filename="../meshes/right_hip_pitch_link.STL"/>
       </geometry>
-    </collision> -->
+    </collision>
   </link>
   <joint name="right_hip_pitch_joint" type="revolute">
     <origin xyz="0 -0.064452 -0.1027" rpy="0 0 0"/>
@@ -624,12 +624,12 @@
         <color rgba="0.2 0.2 0.2 1"/>
       </material>
     </visual>
-    <!-- <collision>
+    <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
         <mesh filename="../meshes/logo_link.STL"/>
       </geometry>
-    </collision> -->
+    </collision>
   </link>
 
   <!-- Head -->
